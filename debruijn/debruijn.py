@@ -110,8 +110,8 @@ def cut_kmer(read: str, kmer_size: int) -> Iterator[str]:
     :param read: (str) Sequence of a read.
     :return: A generator object that provides the kmers (str) of size kmer_size.
     """
-    pass
-
+    for i in range(len(read) - kmer_size + 1):
+        yield read[i:i + kmer_size]
 
 def build_kmer_dict(fastq_file: Path, kmer_size: int) -> Dict[str, int]:
     """Build a dictionnary object of all kmer occurrences in the fastq file

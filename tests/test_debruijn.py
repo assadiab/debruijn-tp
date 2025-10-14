@@ -43,7 +43,6 @@ def test_cut_kmer(global_data):
     assert next(kmer_reader) == "AGA"
     global_data.grade += 1
 
-
 def test_build_kmer_dict(global_data):
     """Test kmer dict"""
     kmer_dict = build_kmer_dict(Path(__file__).parent / "test_build.fq", 3)
