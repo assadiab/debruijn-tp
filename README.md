@@ -31,6 +31,32 @@ Dans le dossier [`data/`](./data/), vous trouverez :
 | `eva71.fna` | Génome de référence de l’entérovirus A71 |
 | `eva71_plus_perfect.fq` | Lectures simulées au format FASTQ |
 
+## 🔽 Cloner le dépôt et naviguer
+
+Pour récupérer le projet sur votre machine locale :
+
+```bash
+# Cloner le dépôt
+git clone https://github.com/assadiab/debruijn-tp.git
+
+# Aller dans le dossier du projet
+cd debruijn-tp
+
+# Vérifier les fichiers présents
+ls
+```
+Vous devriez voir quelque chose comme:
+```
+├── README.md
+├── data/
+│   ├── eva71.fna
+│   └── eva71_plus_perfect.fq
+├── debruijn/
+│   └── debruijn.py
+├── pixi.lock
+├── pixi.toml
+└── tests/
+```
 
 ## Installation des dépendances
 
@@ -63,21 +89,6 @@ pixi run python debruijn/debruijn.py -i data/eva71_plus_perfect.fq -k 21 -o resu
 - `-k KMER_SIZE`       : taille des k-mers (par défaut : 21)
 - `-o OUTPUT_FILE`     : fichier de sortie contenant les contigs au format FASTA
 
----
-
-## Structure du projet
-
-```
-├── README.md
-├── data/
-│   ├── eva71.fna
-│   └── eva71_plus_perfect.fq
-├── debruijn/
-│   └── debruijn.py
-├── pixi.lock
-├── pixi.toml
-└── tests/
-```
 ## Résultats attendus
 
 L’exécution du programme sur les données du TP génère un fichier `contigs.fasta` contenant les séquences assemblées.  
