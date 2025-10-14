@@ -159,7 +159,6 @@ def test_remove_paths(global_data):
     assert 5 not in graph_4.nodes()
     global_data.grade += 3
 
-
 def test_select_best_path(global_data):
     graph_1 = nx.DiGraph()
     graph_1.add_edges_from([(1, 2), (3, 2), (2, 4), (4, 5), (5, 6), (5, 7)])

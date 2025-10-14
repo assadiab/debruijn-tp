@@ -197,8 +197,38 @@ def select_best_path(
     :param delete_sink_node: (boolean) True->We remove the last node of a path
     :return: (nx.DiGraph) A directed graph object
     """
-    pass
+    if not path_list or len(path_list) == 1:
+        return graph
 
+        # Criterion 1: Compare by weight (standard deviation > 0 means differences exist)
+    weight_std = statistics.stdev(weight_avg_list) if len(weight_avg_list) > 1 else 0
+
+    if weight_std > 0:
+        # Select path with highest weight
+        max_weight = max(weight_avg_list)
+        best_indices = [i for i, w in enumerate(weight_avg_list) if w == max_weight]
+    else:
+        best_indices = list(range(len(path_list)))
+
+    # Criterion 2: If tie, compare by length
+    if len(best_indices) > 1:
+        length_std = statistics.stdev([path_length[i] for i in best_indices]) if len(best_indices) > 1 else 0
+
+        if length_std > 0:
+            max_length = max(path_length[i] for i in best_indices)
+            best_indices = [i for i in best_indices if path_length[i] == max_length]
+
+    # Criterion 3: If still tie, random selection
+    if len(best_indices) > 1:
+        best_idx = randint(0, len(best_indices) - 1)
+        best_idx = best_indices[best_idx]
+    else:
+        best_idx = best_indices[0]
+
+    # Remove all paths except the best one
+    paths_to_remove = [path_list[i] for i in range(len(path_list)) if i != best_idx]
+
+    return remove_paths(graph, paths_to_remove, delete_entry_node, delete_sink_node)
 
 def path_average_weight(graph: DiGraph, path: List[str]) -> float:
     """Compute the weight of a path
