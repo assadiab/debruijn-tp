@@ -1,6 +1,6 @@
 [workspace]
 authors = ["assadiab <assa.diabira@etu.u-paris.fr>"]
-channels = ["conda-forge"]
+channels = ["conda-forge","bioconda"]
 name = "debruijn-tp"
 platforms = ["osx-arm64"]
 version = "0.1.0"
@@ -13,3 +13,5 @@ pytest = ">=8.4.2,<9"
 pytest-cov = ">=7.0.0,<8"
 pylint = ">=4.0.0,<5"
 matplotlib = ">=3.10.6,<4"
+black = ">=25.1.0,<26"
+blast = ">=2.16.0,<3"
