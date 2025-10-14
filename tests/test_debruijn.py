@@ -269,7 +269,6 @@ def test_solve_bubble(global_data):
     assert (9, 5) in graph_2.edges()
     global_data.grade += 2
 
-
 def test_simplify_bubbles(global_data):
     graph_1 = nx.DiGraph()
     graph_1.add_weighted_edges_from(

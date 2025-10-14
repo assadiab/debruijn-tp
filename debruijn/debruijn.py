@@ -250,8 +250,24 @@ def solve_bubble(graph: DiGraph, ancestor_node: str, descendant_node: str) -> Di
     :param descendant_node: (str) A downstream node in the graph
     :return: (nx.DiGraph) A directed graph object
     """
-    pass
+    # Find all simple paths between ancestor and descendant
+    all_paths = list(all_simple_paths(graph, ancestor_node, descendant_node))
 
+    if len(all_paths) <= 1:
+        return graph
+
+    # Calculate path lengths (number of nodes)
+    path_lengths = [len(path) for path in all_paths]
+
+    # Calculate average weights for each path
+    path_weights = [path_average_weight(graph, path) for path in all_paths]
+
+    # Select best path
+    # For bubbles: we don't delete the entry (ancestor) or sink (descendant) nodes
+    return select_best_path(
+        graph, all_paths, path_lengths, path_weights,
+        delete_entry_node=False, delete_sink_node=False
+    )
 
 def simplify_bubbles(graph: DiGraph) -> DiGraph:
     """Detect and explode bubbles
