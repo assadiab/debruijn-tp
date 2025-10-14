@@ -368,8 +368,49 @@ def solve_out_tips(graph: DiGraph, ending_nodes: List[str]) -> DiGraph:
     :param ending_nodes: (list) A list of ending nodes
     :return: (nx.DiGraph) A directed graph object
     """
-    pass
+    tip = False
 
+    # Find nodes with multiple successors
+    for node in list(graph.nodes()):
+        if not graph.has_node(node):
+            continue
+
+        successors = list(graph.successors(node))
+
+        # If node has multiple successors
+        if len(successors) > 1:
+            # Check if any successors are ending nodes or connected to ending nodes
+            paths = []
+
+            for end_node in ending_nodes:
+                if not graph.has_node(end_node):
+                    continue
+
+                # Check if there's a path from current node to this ending node
+                if has_path(graph, node, end_node):
+                    # Get all simple paths
+                    for path in all_simple_paths(graph, node, end_node):
+                        paths.append(path)
+
+            # If we found multiple paths from this node to ending nodes
+            if len(paths) > 1:
+                # Calculate metrics
+                path_lengths = [len(path) for path in paths]
+                path_weights = [path_average_weight(graph, path) for path in paths]
+
+                # Remove out tips: keep divergence node, delete sink nodes
+                graph = select_best_path(
+                    graph, paths, path_lengths, path_weights,
+                    delete_entry_node=False, delete_sink_node=True
+                )
+                tip = True
+                break
+
+    # Recursive approach
+    if tip:
+        graph = solve_out_tips(graph, get_sink_nodes(graph))
+
+    return graph
 
 def get_starting_nodes(graph: DiGraph) -> List[str]:
     """Get nodes without predecessors

@@ -212,7 +212,6 @@ def test_select_best_path(global_data):
     graph_5 = select_best_path(graph_5, [[2, 4, 5], [2, 8, 9, 5]], [1, 4], [10, 10])
     global_data.grade += 4
 
-
 def test_solve_bubble(global_data):
     graph_1 = nx.DiGraph()
     graph_1.add_weighted_edges_from(
@@ -325,7 +324,6 @@ def test_solve_out_tips(global_data):
     assert (4, 5) not in graph_2.edges()
     assert (6, 7) in graph_2.edges()
     global_data.grade += 4
-
 
 # Explicitly call finalize function after all tests
 def pytest_sessionfinish(session, exitstatus):
