@@ -1,0 +1,15 @@
+[workspace]
+authors = ["assadiab <assa.diabira@etu.u-paris.fr>"]
+channels = ["conda-forge"]
+name = "debruijn-tp"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+networkx = ">=3.5,<4"
+pytest = ">=8.4.2,<9"
+pytest-cov = ">=7.0.0,<8"
+pylint = ">=4.0.0,<5"
+matplotlib = ">=3.10.6,<4"

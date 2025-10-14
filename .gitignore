@@ -1,3 +1,8 @@
 __py_cache__
 *.pyc
 .coverage
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+.gitattributes
+.idea
