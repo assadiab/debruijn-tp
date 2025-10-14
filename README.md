@@ -53,7 +53,6 @@ Vous devriez voir quelque chose comme:
 │   └── eva71_plus_perfect.fq
 ├── debruijn/
 │   └── debruijn.py
-├── pixi.lock
 ├── pixi.toml
 └── tests/
 ```
@@ -80,7 +79,7 @@ Le script principal est [`debruijn.py`](./debruijn/debruijn.py). Il prend en ent
 ### Commande de base :
 
 ```bash
-pixi run python debruijn/debruijn.py -i data/eva71_plus_perfect.fq -k 21 -o results/contigs.fasta
+pixi run python debruijn/debruijn.py -i data/eva71_plus_perfect.fq -k 21 -o contigs.fasta
 ```
 ### Arguments disponibles
 
@@ -103,7 +102,7 @@ Pour les analyses de validation, la suite **BLAST+** peut être utilisée afin d
 
 ```bash
 makeblastdb -in data/eva71.fna -dbtype nucl -out data/eva71_db
-blastn -query results/contigs.fasta -db data/eva71_db -out results/blast_results.txt
+blastn -query contigs.fasta -db data/eva71_db -out blast_results.txt
 ```
 
 ## Contact
