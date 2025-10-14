@@ -275,8 +275,40 @@ def simplify_bubbles(graph: DiGraph) -> DiGraph:
     :param graph: (nx.DiGraph) A directed graph object
     :return: (nx.DiGraph) A directed graph object
     """
-    pass
+    bubble = False
 
+    # Iterate through all nodes to find bubbles
+    for node in list(graph.nodes()):
+        if not graph.has_node(node):
+            continue
+
+        # Get predecessors of current node
+        predecessors = list(graph.predecessors(node))
+
+        # If node has multiple predecessors, check for common ancestor
+        if len(predecessors) > 1:
+            # Check all unique combinations of predecessors
+            for i in range(len(predecessors)):
+                for j in range(i + 1, len(predecessors)):
+                    # Find lowest common ancestor
+                    ancestor = lowest_common_ancestor(graph, predecessors[i], predecessors[j])
+
+                    if ancestor is not None:
+                        # Bubble detected between ancestor and current node
+                        bubble = True
+                        break
+
+                if bubble:
+                    break
+
+        if bubble:
+            break
+
+    # Recursive approach: simplify one bubble then check again
+    if bubble:
+        graph = simplify_bubbles(solve_bubble(graph, ancestor, node))
+
+    return graph
 
 def solve_entry_tips(graph: DiGraph, starting_nodes: List[str]) -> DiGraph:
     """Remove entry tips

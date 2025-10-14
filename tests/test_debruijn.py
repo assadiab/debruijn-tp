@@ -293,7 +293,6 @@ def test_simplify_bubbles(global_data):
     assert (10, 5) not in graph_1.edges()
     global_data.grade += 1
 
-
 def test_solve_entry_tips(global_data):
     graph_1 = nx.DiGraph()
     graph_1.add_weighted_edges_from([(1, 2, 10), (3, 2, 2), (2, 4, 15), (4, 5, 15)])
