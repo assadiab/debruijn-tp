@@ -101,8 +101,8 @@ Ces contigs peuvent ensuite être comparés :
 Pour les analyses de validation, la suite **BLAST+** peut être utilisée afin de comparer les contigs au génome de référence :  
 
 ```bash
-makeblastdb -in data/eva71.fna -dbtype nucl -out data/eva71_db
-blastn -query contigs.fasta -db data/eva71_db -out blast_results.txt
+pixi run makeblastdb -in data/eva71.fna -dbtype nucl -out data/eva71_db
+pixi run blastn -query contigs.fasta -db data/eva71_db -out blast_results.txt
 ```
 
 ## Contact
