@@ -290,8 +290,13 @@ def save_contigs(contigs_list: List[str], output_file: Path) -> None:
     :param contig_list: (list) List of [contiguous sequence and their length]
     :param output_file: (Path) Path to the output file
     """
-    pass
-
+    with open(output_file, 'w') as f:
+        for i, (contig, length) in enumerate(contigs_list):
+            # Write header with contig number and length
+            f.write(f">contig_{i} len={length}\n")
+            # Write sequence wrapped at 80 characters per line
+            wrapped_sequence = textwrap.fill(contig, width=80)
+            f.write(wrapped_sequence + "\n")
 
 def draw_graph(graph: DiGraph, graphimg_file: Path) -> None:  # pragma: no cover
     """Draw the graph

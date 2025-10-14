@@ -113,7 +113,6 @@ def test_get_contigs(global_data):
         assert contig[1] == 8
     global_data.grade += 3
 
-
 def test_save_contigs(global_data):
     test_file = Path(__file__).parent / "test.fna"
     contig = [("TCAGCGAT", 8), ("TCAGCGAA", 8), ("ACAGCGAT", 8), ("ACAGCGAA", 8)]
