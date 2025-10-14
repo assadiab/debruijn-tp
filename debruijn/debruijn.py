@@ -251,7 +251,7 @@ def get_sink_nodes(graph: DiGraph) -> List[str]:
     :param graph: (nx.DiGraph) A directed graph object
     :return: (list) A list of all nodes without successors
     """
-
+    return [node for node in graph.nodes() if graph.out_degree(node) == 0]
 
 def get_contigs(
     graph: DiGraph, starting_nodes: List[str], ending_nodes: List[str]

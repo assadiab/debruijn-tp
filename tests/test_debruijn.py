@@ -82,7 +82,6 @@ def test_get_starting_nodes(global_data):
     global grade
     global_data.grade += 1
 
-
 def test_get_sink_nodes(global_data):
     graph = nx.DiGraph()
     graph.add_edges_from([(1, 2), (3, 2), (2, 4), (4, 5), (5, 6), (5, 7)])
