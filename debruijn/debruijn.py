@@ -100,19 +100,10 @@ def read_fastq(fastq_file: Path) -> Iterator[str]:
     :param fastq_file: (Path) Path to the fastq file.
     :return: A generator object that iterate the read sequences.
     """
-    with open(fastq_file, 'r') as f:
-        while True:
-            # Read 4 lines at a time (FASTQ format)
-            header = f.readline()
-            if not header:
-                break
-            sequence = f.readline().strip()
-            f.readline()  # '+' line
-            f.readline()  # quality line
-
-            if sequence:
-                yield sequence
-
+    with open(fastq_file, "r") as f:
+        # Read blocks of 4 lines until exhaustion
+        for header, seq, _, _ in zip(*[f]*4):
+            yield seq.strip()
 
 def cut_kmer(read: str, kmer_size: int) -> Iterator[str]:
     """Cut read into kmers of size kmer_size.
