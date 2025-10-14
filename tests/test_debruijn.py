@@ -91,7 +91,6 @@ def test_get_sink_nodes(global_data):
     assert 7 in nodes
     global_data.grade += 1
 
-
 def test_get_contigs(global_data):
     graph = nx.DiGraph()
     graph.add_edges_from(

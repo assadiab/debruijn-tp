@@ -263,8 +263,26 @@ def get_contigs(
     :param ending_nodes: (list) A list of nodes without successors
     :return: (list) List of [contiguous sequence and their length]
     """
-    pass
+    contigs = []
 
+    for start_node in starting_nodes:
+        for end_node in ending_nodes:
+            # Check if path exists between start and end
+            if has_path(graph, start_node, end_node):
+                # Get all simple paths
+                for path in all_simple_paths(graph, start_node, end_node):
+                    # Build contig sequence
+                    # First node gives us the first k-mer (which is k-1 length node)
+                    contig = path[0]
+
+                    # Each subsequent node adds one nucleotide (last character)
+                    for node in path[1:]:
+                        contig += node[-1]
+
+                    # Add tuple (contig, length)
+                    contigs.append((contig, len(contig)))
+
+    return contigs
 
 def save_contigs(contigs_list: List[str], output_file: Path) -> None:
     """Write all contigs in fasta format
