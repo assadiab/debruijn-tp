@@ -5,22 +5,21 @@ import networkx as nx
 import hashlib
 from pathlib import Path
 from .test_fixtures import global_data
-from .context import debruijn
-from debruijn import read_fastq
-from debruijn import cut_kmer
-from debruijn import build_kmer_dict
-from debruijn import build_graph
-from debruijn import get_starting_nodes
-from debruijn import get_sink_nodes
-from debruijn import get_contigs
-from debruijn import save_contigs
-from debruijn import path_average_weight
-from debruijn import remove_paths
-from debruijn import select_best_path
-from debruijn import solve_bubble
-from debruijn import simplify_bubbles
-from debruijn import solve_entry_tips
-from debruijn import solve_out_tips
+from debruijn.debruijn import read_fastq
+from debruijn.debruijn import cut_kmer
+from debruijn.debruijn import build_kmer_dict
+from debruijn.debruijn import build_graph
+from debruijn.debruijn import get_starting_nodes
+from debruijn.debruijn import get_sink_nodes
+from debruijn.debruijn import get_contigs
+from debruijn.debruijn import save_contigs
+from debruijn.debruijn import path_average_weight
+from debruijn.debruijn import remove_paths
+from debruijn.debruijn import select_best_path
+from debruijn.debruijn import solve_bubble
+from debruijn.debruijn import simplify_bubbles
+from debruijn.debruijn import solve_entry_tips
+from debruijn.debruijn import solve_out_tips
 
 
 def test_read_fastq(global_data):
@@ -35,7 +34,6 @@ def test_read_fastq(global_data):
         == "TTTGAATTACAACATCCATATGTTCTTGATGCTGGAATTCCAATATCTCAGTTGACAGTGTGCCCTCACCAGTGGATCAATTTACGAACCAACAATTGTG"
     )
     global_data.grade += 1
-
 
 def test_cut_kmer(global_data):
     """Test cut_kmer"""

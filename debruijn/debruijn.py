@@ -39,13 +39,13 @@ from typing import Iterator, Dict, List
 
 matplotlib.use("Agg")
 
-__author__ = "Your Name"
-__copyright__ = "Universite Paris Diderot"
-__credits__ = ["Your Name"]
+__author__ = "Assa DIABIRA"
+__copyright__ = "Universite Paris Cité"
+__credits__ = ["Assa DIABIRA"]
 __license__ = "GPL"
 __version__ = "1.0.0"
-__maintainer__ = "Your Name"
-__email__ = "your@email.fr"
+__maintainer__ = "Assa DIABIRA"
+__email__ = "assa.diabira@etu.u-paris.fr"
 __status__ = "Developpement"
 
 
@@ -66,7 +66,6 @@ def isfile(path: str) -> Path:  # pragma: no cover
             msg = f"{myfile.name} does not exist."
         raise argparse.ArgumentTypeError(msg)
     return myfile
-
 
 def get_arguments():  # pragma: no cover
     """Retrieves the arguments of the program.
@@ -95,14 +94,24 @@ def get_arguments():  # pragma: no cover
     )
     return parser.parse_args()
 
-
 def read_fastq(fastq_file: Path) -> Iterator[str]:
     """Extract reads from fastq files.
 
     :param fastq_file: (Path) Path to the fastq file.
     :return: A generator object that iterate the read sequences.
     """
-    pass
+    with open(fastq_file, 'r') as f:
+        while True:
+            # Read 4 lines at a time (FASTQ format)
+            header = f.readline()
+            if not header:
+                break
+            sequence = f.readline().strip()
+            f.readline()  # '+' line
+            f.readline()  # quality line
+
+            if sequence:
+                yield sequence
 
 
 def cut_kmer(read: str, kmer_size: int) -> Iterator[str]:
