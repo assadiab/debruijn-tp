@@ -101,7 +101,6 @@ def read_fastq(fastq_file: Path) -> Iterator[str]:
     :return: A generator object that iterate the read sequences.
     """
     with open(fastq_file, "r") as f:
-        # Read blocks of 4 lines until exhaustion
         for header, seq, _, _ in zip(*[f]*4):
             yield seq.strip()
 
