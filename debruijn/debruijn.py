@@ -133,8 +133,18 @@ def build_graph(kmer_dict: Dict[str, int]) -> DiGraph:
     :param kmer_dict: A dictionnary object that identify all kmer occurrences.
     :return: A directed graph (nx) of all kmer substring and weight (occurrence).
     """
-    pass
+    graph = DiGraph()
 
+    for kmer, weight in kmer_dict.items():
+        # prefix = first k-1 characters
+        # suffix = last k-1 characters
+        prefix = kmer[:-1]
+        suffix = kmer[1:]
+
+        # Add edge with weight (occurrence count)
+        graph.add_edge(prefix, suffix, weight=weight)
+
+    return graph
 
 def remove_paths(
     graph: DiGraph,

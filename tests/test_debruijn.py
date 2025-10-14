@@ -54,7 +54,6 @@ def test_build_kmer_dict(global_data):
     assert kmer_dict["AGA"] == 2
     global_data.grade += 2
 
-
 def test_build_graph(global_data):
     """Test build graph"""
     kmer_dict = {"GAG": 1, "CAG": 1, "AGA": 2, "TCA": 1}
