@@ -317,8 +317,49 @@ def solve_entry_tips(graph: DiGraph, starting_nodes: List[str]) -> DiGraph:
     :param starting_nodes: (list) A list of starting nodes
     :return: (nx.DiGraph) A directed graph object
     """
-    pass
+    tip = False
 
+    # Find nodes with multiple predecessors
+    for node in list(graph.nodes()):
+        if not graph.has_node(node):
+            continue
+
+        predecessors = list(graph.predecessors(node))
+
+        # If node has multiple predecessors
+        if len(predecessors) > 1:
+            # Check if any predecessors are starting nodes or connected to starting nodes
+            paths = []
+
+            for start_node in starting_nodes:
+                if not graph.has_node(start_node):
+                    continue
+
+                # Check if there's a path from this starting node to current node
+                if has_path(graph, start_node, node):
+                    # Get all simple paths
+                    for path in all_simple_paths(graph, start_node, node):
+                        paths.append(path)
+
+            # If we found multiple paths from starting nodes to this node
+            if len(paths) > 1:
+                # Calculate metrics
+                path_lengths = [len(path) for path in paths]
+                path_weights = [path_average_weight(graph, path) for path in paths]
+
+                # Remove entry tips: delete entry nodes, keep convergence node
+                graph = select_best_path(
+                    graph, paths, path_lengths, path_weights,
+                    delete_entry_node=True, delete_sink_node=False
+                )
+                tip = True
+                break
+
+    # Recursive approach
+    if tip:
+        graph = solve_entry_tips(graph, get_starting_nodes(graph))
+
+    return graph
 
 def solve_out_tips(graph: DiGraph, ending_nodes: List[str]) -> DiGraph:
     """Remove out tips

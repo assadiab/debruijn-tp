@@ -309,7 +309,6 @@ def test_solve_entry_tips(global_data):
     assert (3, 2) in graph_2.edges()
     global_data.grade += 4
 
-
 def test_solve_out_tips(global_data):
     graph_1 = nx.DiGraph()
     graph_1.add_weighted_edges_from(
